@@ -1,6 +1,7 @@
 <template>
   <h1 class="rootClass">根组件</h1>
-  <h2>ref():{{ refObj }}</h2>
+  <h2>ref()->reactive():{{ refObj }}</h2>
+  <h2>reactive()专门处理数组和对象:{{ refObj }}</h2>
   <button @click="changeRefObj">点击</button>
 
   <MyChild fatherData="父数据">
