@@ -7,11 +7,14 @@
 
 <script>
   export default {
+    // 父组件给子组件传递数据
     props: ["fatherData"],
-    setup(props) {
+    setup(props, context) {
+      // 获取父组件数据
       function getFatherData() {
-        console.log(props)
-        console.log(props.fatherData)
+        console.log("子组件获取父组件数据")
+        console.log("props: ", props)
+        console.log("context: ", context)
       }
       return {
         getFatherData
