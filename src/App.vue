@@ -1,6 +1,10 @@
 <template>
-  <h1>根组件</h1>
-  <MyChild fatherData="父数据"/>
+  <h1 class="root">根组件</h1>
+  <MyChild fatherData="父数据">
+    <template v-slot:childSlot1>
+      <div>子组件插槽</div>
+    </template>
+  </MyChild>
 </template>
 
 <script>
@@ -18,4 +22,7 @@
 </script>
 
 <style scoped>
+  .root {
+    color: red;
+  }
 </style>
