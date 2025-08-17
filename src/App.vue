@@ -1,20 +1,14 @@
 <template>
-  <h1 class="title">我是根组件</h1>
-  <button @click="fn">点击</button>
-  <MyChild/>
+  <h1>根组件</h1>
+  <MyChild fatherData="父数据"/>
 </template>
 
 <script>
-  import MyChild from './pages/MyChild.vue'
+  import MyChild from "./pages/MyChild.vue";
+
   export default {
-    data() {
+    setup() {
       return {
-        msg: 'app'
-      }
-    },
-    methods: {
-      fn() {
-        alert('点击了')
       }
     },
     components: {
@@ -24,7 +18,4 @@
 </script>
 
 <style scoped>
-  .title {
-    color: red;
-  }
 </style>

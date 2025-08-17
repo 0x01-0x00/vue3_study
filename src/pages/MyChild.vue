@@ -1,20 +1,22 @@
 <template>
   <div>
-    <h1 class="title">我是子组件</h1>
+    <h1>子组件{{fatherData}}</h1>
+    <button @click="getFatherData">点击获取父组件数据</button>
   </div>
 </template>
 
 <script>
   export default {
-    data() {
+    props: ["fatherData"],
+    setup(props) {
+      function getFatherData() {
+        console.log(props)
+        console.log(props.fatherData)
+      }
       return {
-        msg: 'child'
+        getFatherData
       }
     },
-    methods: {
-    },
-    components: {
-    }
   }
 </script>
 
