@@ -1,6 +1,6 @@
 <template>
   <hr/>
-  <h1 class="rootClass">根组件</h1>
+  <h1 class="rootClass">根组件，当前时间{{ currentTime }}</h1>
   <h3>ref()->reactive():{{ refObj }}</h3>
   <button @click="changeRefObj">点击整体赋值</button>
   <h3>reactive()无法整体赋值:{{ reactiveObj }}</h3>
@@ -21,10 +21,17 @@
 
 <script>
   import MyChild from "./pages/MyChild.vue";
-  import {reactive, ref, toRef} from "vue";
+  import {onMounted, reactive, ref, toRef} from "vue";
 
   export default {
     setup() {
+      const currentTime = ref(new Date().toLocaleTimeString())
+      onMounted(() => {
+        setInterval(() => {
+          currentTime.value = new Date().toLocaleTimeString()
+        }, 800)
+      })
+
 
       let refObj = ref({name: "响应式数据refObj", array: [1, 2, 3]})
       let reactiveObj = reactive({name: "响应式数据reactiveObj", array: [1, 2, 3]})
@@ -70,6 +77,7 @@
       }
 
       return {
+        currentTime,
         refObj,
         reactiveObj,
         toRefObj,
