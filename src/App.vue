@@ -36,7 +36,8 @@
         } else {
           reactiveObj = {name: "响应式数据reactiveObj", array: [1, 2, 3]}
         }
-        console.log(refObj)
+        alert("丢失响应式！！！")
+        console.log(reactiveObj)
       }
       function changeReactiveValue() {
         if (reactiveObj.name === "响应式数据reactiveObj") {
