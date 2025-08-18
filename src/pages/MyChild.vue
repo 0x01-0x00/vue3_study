@@ -2,7 +2,7 @@
   <div class="childClass">
     <h1>子组件{{fatherData}}</h1>
     <slot name="childSlot1">子组件插槽数据</slot>
-    <button @click="getFatherData">点击获取父组件数据</button>
+    <button class="childClass" @click="getFatherData">点击获取父组件数据</button>
   </div>
 </template>
 
