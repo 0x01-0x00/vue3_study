@@ -9,6 +9,8 @@
   <hr/>
   <h3>toRef():{{ toRefObj }}</h3>
   <button @click="changeToRefValue">点击</button>
+  <hr/>
+  <h3>computed():{{ computedObj }}</h3>
 
   <hr/>
   <MyChild fatherData="父数据">
@@ -21,7 +23,7 @@
 
 <script>
   import MyChild from "./pages/MyChild.vue";
-  import {onMounted, reactive, ref, toRef} from "vue";
+  import {computed, onMounted, reactive, ref, toRef} from "vue";
 
   export default {
     setup() {
@@ -35,7 +37,6 @@
 
       let refObj = ref({name: "响应式数据refObj", array: [1, 2, 3]})
       let reactiveObj = reactive({name: "响应式数据reactiveObj", array: [1, 2, 3]})
-
       function changeRefObj() {
         if (refObj.value.name === "响应式数据refObj") {
           refObj.value = {name: "响应式数据refObj->Change", array: [4, 5, 6]}
@@ -65,7 +66,6 @@
 
       let toRefObj = reactive({name: "响应式数据toRefObj", array: [1, 2, 3]})
       let toRefObj_name = toRef(toRefObj, "name")
-
       function changeToRefValue() {
         console.log(toRefObj_name)
         if (toRefObj.name === "响应式数据toRefObj") {
@@ -76,11 +76,16 @@
         console.log(toRefObj_name)
       }
 
+      let computedObj = computed(() => {
+        return refObj.value.name + "+" + reactiveObj.name
+      })
+
       return {
         currentTime,
         refObj,
         reactiveObj,
         toRefObj,
+        computedObj,
         changeRefObj,
         changeReactiveObj,
         changeReactiveValue,
