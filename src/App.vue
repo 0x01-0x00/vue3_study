@@ -11,6 +11,9 @@
   <button @click="changeToRefValue">点击</button>
   <hr/>
   <h3>computed():{{ computedObj }}</h3>
+  <hr/>
+  <h3>watch():{{ watchObj }}</h3>
+  <button @click="changeWatchObj">点击+1</button>
 
   <hr/>
   <MyChild fatherData="父数据">
@@ -23,7 +26,7 @@
 
 <script>
   import MyChild from "./pages/MyChild.vue";
-  import {computed, onMounted, reactive, ref, toRef} from "vue";
+  import {computed, onMounted, reactive, ref, toRef, watch} from "vue";
 
   export default {
     setup() {
@@ -76,9 +79,21 @@
         console.log(toRefObj_name)
       }
 
+
       let computedObj = computed(() => {
         return refObj.value.name + "+" + reactiveObj.name
       })
+
+
+      let watchObj = reactive({id: 0})
+      function changeWatchObj() {
+        watchObj.id++
+      }
+      watch(watchObj,(newValue, oldValue) => {
+        console.log("watchObj()")
+        console.log(newValue, oldValue)
+      })
+
 
       return {
         currentTime,
@@ -86,10 +101,12 @@
         reactiveObj,
         toRefObj,
         computedObj,
+        watchObj,
         changeRefObj,
         changeReactiveObj,
         changeReactiveValue,
-        changeToRefValue
+        changeToRefValue,
+        changeWatchObj
       }
     },
     components: {
