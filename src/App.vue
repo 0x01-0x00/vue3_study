@@ -14,6 +14,12 @@
   <hr/>
   <h3>watch():{{ watchObj }}</h3>
   <button @click="changeWatchObj">点击+1</button>
+  <hr/>
+  <ul>
+    <li v-for="item in weather" :key="item.date">
+      {{ item.date }} : {{ item.dayweather }}
+    </li>
+  </ul>
 
   <hr/>
   <MyChild fatherData="父数据">
@@ -27,6 +33,7 @@
 <script>
   import MyChild from "./pages/MyChild.vue";
   import {computed, onMounted, reactive, ref, toRef, watch} from "vue";
+  import axios from "axios";
 
   export default {
     setup() {
@@ -95,6 +102,25 @@
       })
 
 
+      let weather = ref(null)
+      onMounted(()=>{
+        axios({
+          url: "https://restapi.amap.com/v3/weather/weatherInfo",
+          method: "get",
+          params: {
+            key: "8d1cdcd43165f997258a2a0352b17e68",
+            city: "合肥",
+            extensions: "all",
+            output: "json"
+          }
+        }).then((res) => {
+          weather.value = res.data.forecasts[0].casts
+          console.log("天气请求成功")
+          console.log(res.data)
+        })
+      })
+
+
       return {
         currentTime,
         refObj,
@@ -102,6 +128,7 @@
         toRefObj,
         computedObj,
         watchObj,
+        weather,
         changeRefObj,
         changeReactiveObj,
         changeReactiveValue,
